@@ -1,4 +1,4 @@
-package com.github.pbazhkogd.intellijideaaichatassistantplugin.toolWindow
+package com.griddynamics.pbazhko.plugin.toolWindow
 
 import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.thisLogger
@@ -8,12 +8,12 @@ import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBPanel
 import com.intellij.ui.content.ContentFactory
-import com.github.pbazhkogd.intellijideaaichatassistantplugin.MyBundle
-import com.github.pbazhkogd.intellijideaaichatassistantplugin.services.MyProjectService
+import com.griddynamics.pbazhko.plugin.MyBundle
+import com.griddynamics.pbazhko.plugin.services.MyProjectService
 import javax.swing.JButton
 
 
-class MyToolWindowFactory : ToolWindowFactory {
+class AIChatToolWindowFactory : ToolWindowFactory {
 
     init {
         thisLogger().warn("Don't forget to remove all non-needed sample code files with their corresponding registration entries in `plugin.xml`.")

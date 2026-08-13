@@ -1,4 +1,4 @@
-package com.github.pbazhkogd.intellijideaaichatassistantplugin
+package com.griddynamics.pbazhko.plugin
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls

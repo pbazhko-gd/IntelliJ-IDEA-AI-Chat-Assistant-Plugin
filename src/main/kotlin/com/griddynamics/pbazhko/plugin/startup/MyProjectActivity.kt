@@ -1,4 +1,4 @@
-package com.github.pbazhkogd.intellijideaaichatassistantplugin.startup
+package com.griddynamics.pbazhko.plugin.startup
 
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.project.Project

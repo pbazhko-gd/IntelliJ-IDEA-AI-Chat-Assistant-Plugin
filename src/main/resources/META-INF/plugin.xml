@@ -4,8 +4,8 @@
     <name>AI Chat Assistant</name>
     <vendor email="pbazhko@griddynamics.com" url="https://griddynamics.com">Pavel Bazhko</vendor>
     <description><![CDATA[
-        <p><b>IntelliJ-IDEA-AI-Chat-Assistant-Plugin</b> is a repository that provides a pure template to make it easier to create a new plugin project.</p>
-        <p>The main goal of this template is to speed up the setup phase of plugin development for both new and experienced developers by preconfiguring the project scaffold and CI, linking to the proper documentation pages, and keeping everything organized.</p>
+        <p><b>IntelliJ-IDEA-AI-Chat-Assistant-Plugin</b></p>
+        <p>AI Chat Assistant</p>
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
@@ -13,7 +13,9 @@
     <resource-bundle>messages.AiChatAssistant</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.pbazhkogd.intellijideaaichatassistantplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="com.github.pbazhkogd.intellijideaaichatassistantplugin.startup.MyProjectActivity" />
+        <toolWindow id="AI Chat"
+                    anchor="right"
+                    icon="AllIcons.Actions.Refresh"
+                    factoryClass="com.griddynamics.pbazhko.plugin.toolWindow.AIChatToolWindowFactory"/>
     </extensions>
 </idea-plugin>
