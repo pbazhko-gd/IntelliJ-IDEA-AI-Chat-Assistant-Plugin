@@ -37,7 +37,6 @@ class AIChatPanel : SimpleToolWindowPanel(true, true) {
             true // true = horizontal toolbar
         )
         actionToolbar.targetComponent = this
-
         toolbar = actionToolbar.component
 
         val messageList = JBList<String>().apply {
@@ -76,7 +75,7 @@ class AIChatPanel : SimpleToolWindowPanel(true, true) {
                 // WE ARE NOW ON A BACKGROUND THREAD!
                 // Do NOT touch the messageList or inputArea here.
 
-                val url = AppSettingsState.Companion.instance.apiBaseUrl
+                val url = AppSettingsState.instance.apiBaseUrl
                 val apiKey = AIChatSecureStorage.getApiKey()
 
                 if (apiKey.isNullOrEmpty()) {
@@ -86,7 +85,7 @@ class AIChatPanel : SimpleToolWindowPanel(true, true) {
 
                 try {
                     val payloadMap = mapOf(
-                        "model" to AppSettingsState.Companion.instance.modelName,
+                        "model" to AppSettingsState.instance.modelName,
                         "messages" to listOf(
                             mapOf("role" to "user", "content" to userMessage)
                         )
