@@ -11,8 +11,6 @@
 
     <depends>com.intellij.modules.platform</depends>
 
-    <resource-bundle>messages.AiChatAssistant</resource-bundle>
-
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow id="AI Chat"
                     anchor="right"

@@ -3,23 +3,33 @@ package com.griddynamics.pbazhko.plugin.ui
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.griddynamics.pbazhko.plugin.action.OpenSettingsAction
+import com.griddynamics.pbazhko.plugin.config.SYSTEM_MESSAGE_PREFIX
+import com.griddynamics.pbazhko.plugin.config.USER_MESSAGE_PREFIX
 import com.griddynamics.pbazhko.plugin.settings.AIChatSecureStorage
 import com.griddynamics.pbazhko.plugin.state.AppSettingsState
+import com.griddynamics.pbazhko.plugin.ui.components.Separator
 import com.intellij.openapi.actionSystem.ActionManager
 import com.intellij.openapi.actionSystem.DefaultActionGroup
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.Task
 import com.intellij.openapi.ui.SimpleToolWindowPanel
+import com.intellij.ui.JBColor
 import com.intellij.ui.components.JBList
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.components.JBTextArea
 import com.intellij.util.io.HttpRequests
+import com.intellij.util.ui.JBUI
 import java.awt.BorderLayout
+import java.awt.Dimension
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
+import java.awt.event.MouseAdapter
+import java.awt.event.MouseEvent
 import javax.swing.DefaultListModel
+import javax.swing.DefaultListSelectionModel
 import javax.swing.JPanel
+import javax.swing.ListSelectionModel
 
 class AIChatPanel : SimpleToolWindowPanel(true, true) {
 
@@ -38,22 +48,24 @@ class AIChatPanel : SimpleToolWindowPanel(true, true) {
 
         toolbar = actionToolbar.component
 
-        val messageList = JBList<String>()
-        messageList.cellRenderer = AIChatCellRenderer()
-        messageList.model = listModel
+        val messageList = JBList<String>().apply {
+            cellRenderer = AIChatCellRenderer()
+            model = listModel
+        }
 
-        val scrollPane = JBScrollPane(messageList)
+        val messageListScrollPane = JBScrollPane(messageList)
 
-        val inputArea = JBTextArea()
-        inputArea.rows = 3
-        inputArea.emptyText.text = "Ask AI a question..."
+        val inputArea = JBTextArea("Ask AI a question").apply {
+            rows = 3
+        }
+
         inputArea.addKeyListener(object : KeyAdapter() {
             override fun keyPressed(e: KeyEvent) {
                 if (e.keyCode == KeyEvent.VK_ENTER && !e.isShiftDown) {
-                    e.consume() // Prevent adding a newline
+                    e.consume()
                     val text = inputArea.text.trim()
                     if (text.isNotEmpty()) {
-                        listModel.addElement("User: $text")
+                        listModel.addElement("$USER_MESSAGE_PREFIX $text")
                         inputArea.text = ""
                         sendToAI(text)
                     }
@@ -61,11 +73,17 @@ class AIChatPanel : SimpleToolWindowPanel(true, true) {
             }
         })
 
-        val inputScrollPane = JBScrollPane(inputArea)
+        val inputContainer = JPanel(BorderLayout()).apply {
+            add(Separator(1), BorderLayout.NORTH)
+            add(JBScrollPane(inputArea).apply {
+                border = JBUI.Borders.empty()
+            }, BorderLayout.CENTER)
+        }
 
-        val mainContainer = JPanel(BorderLayout())
-        mainContainer.add(scrollPane, BorderLayout.CENTER)
-        mainContainer.add(inputScrollPane, BorderLayout.SOUTH)
+        val mainContainer = JPanel(BorderLayout()).apply {
+            add(messageListScrollPane, BorderLayout.CENTER)
+            add(inputContainer, BorderLayout.SOUTH)
+        }
 
         setContent(mainContainer)
     }
@@ -83,7 +101,7 @@ class AIChatPanel : SimpleToolWindowPanel(true, true) {
                 val apiKey = AIChatSecureStorage.getApiKey()
 
                 if (apiKey.isNullOrEmpty()) {
-                    updateUI("System: Please configure your API key in settings.")
+                    updateUI("$SYSTEM_MESSAGE_PREFIX Please configure your API key in settings.")
                     return
                 }
 
@@ -116,7 +134,7 @@ class AIChatPanel : SimpleToolWindowPanel(true, true) {
 
                     updateUI(aiReply)
                 } catch (e: Exception) {
-                    updateUI("System: Failed to connect. ${e.message}")
+                    updateUI("$SYSTEM_MESSAGE_PREFIX Failed to connect. ${e.message}")
                 }
             }
         }.queue()
@@ -130,7 +148,7 @@ class AIChatPanel : SimpleToolWindowPanel(true, true) {
     }
 
     fun setPromptAndSend(prompt: String) {
-        listModel.addElement("User: [Sent Code Selection]")
+        listModel.addElement("$USER_MESSAGE_PREFIX [Sent Code Selection]")
         sendToAI(prompt)
     }
 }

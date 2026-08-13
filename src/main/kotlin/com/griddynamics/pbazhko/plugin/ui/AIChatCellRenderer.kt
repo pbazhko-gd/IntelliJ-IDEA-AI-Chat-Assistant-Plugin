@@ -1,5 +1,7 @@
 package com.griddynamics.pbazhko.plugin.ui
 
+import com.griddynamics.pbazhko.plugin.config.USER_MESSAGE_PREFIX
+import com.griddynamics.pbazhko.plugin.ui.components.RoundedPanel
 import com.intellij.ui.JBColor
 import com.intellij.util.ui.JBUI
 import java.awt.BorderLayout
@@ -23,22 +25,37 @@ class AIChatCellRenderer : ListCellRenderer<String> {
         val panel = JPanel(BorderLayout())
         panel.border = JBUI.Borders.empty(4, 8)
 
-        val textArea = JTextArea(message).apply {
+        val messageContainer = RoundedPanel(
+            backgroundColor = if (message.isUserMessage()) {
+                JBColor(0xE0F7FA, 0x2b3d42)
+            } else {
+                JBColor(0xF1F8E9, 0x33402e)
+            },
+            radius = 20
+        )
+
+        val messageTextArea = JTextArea(message).apply {
             lineWrap = true
             wrapStyleWord = true
-            isOpaque = true
+            isOpaque = false
             isEditable = false
-            border = JBUI.Borders.empty(8)
-            val listWidth = if (list != null && list.width > 0) list.width else 400
+            border = null
+            background = null
+
+            val listWidth = if (list != null && list.width > 0) {
+                list.width
+            } else {
+                400
+            }
             setSize(listWidth - 40, Int.MAX_VALUE)
         }
 
-        if (message.startsWith("User:")) {
-            textArea.background = JBColor(0xE0F7FA, 0x2b3d42) // Light Theme / Dark Theme Colors
-            panel.add(textArea, BorderLayout.EAST) // Right-align user
+        messageContainer.add(messageTextArea, BorderLayout.CENTER)
+
+        if (message.isUserMessage()) {
+            panel.add(messageContainer, BorderLayout.EAST)
         } else {
-            textArea.background = JBColor(0xF1F8E9, 0x33402e)
-            panel.add(textArea, BorderLayout.WEST) // Left-align AI
+            panel.add(messageContainer, BorderLayout.WEST)
         }
 
         panel.isOpaque = false
@@ -46,3 +63,5 @@ class AIChatCellRenderer : ListCellRenderer<String> {
         return panel
     }
 }
+
+private fun String.isUserMessage() = this.startsWith(USER_MESSAGE_PREFIX)
