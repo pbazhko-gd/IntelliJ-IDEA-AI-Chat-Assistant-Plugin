@@ -26,4 +26,13 @@
                 instance="com.griddynamics.pbazhko.plugin.settings.AppSettingsConfigurable"
                 displayName="AI Chat Settings"/>
     </extensions>
+
+    <actions>
+        <action id="com.griddynamics.pbazhko.plugin.action.AskAIContextAction"
+                class="com.griddynamics.pbazhko.plugin.action.AskAIContextAction"
+                text="Ask AI About Selection"
+                description="Send the selected text to the AI Chat Panel">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
 </idea-plugin>

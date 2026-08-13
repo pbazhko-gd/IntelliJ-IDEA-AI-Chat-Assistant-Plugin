@@ -2,8 +2,10 @@ package com.griddynamics.pbazhko.plugin.toolWindow
 
 import com.google.gson.Gson
 import com.griddynamics.pbazhko.plugin.action.OpenSettingsAction
+import com.griddynamics.pbazhko.plugin.services.AIChatPanelService
 import com.griddynamics.pbazhko.plugin.settings.SecureStorage
 import com.griddynamics.pbazhko.plugin.state.AppSettingsState
+import com.griddynamics.pbazhko.plugin.ui.ChatCellRenderer
 import com.intellij.openapi.actionSystem.ActionManager
 import com.intellij.openapi.actionSystem.DefaultActionGroup
 import com.intellij.openapi.application.ApplicationManager
@@ -28,6 +30,8 @@ class AIChatToolWindowFactory : ToolWindowFactory {
 
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         val chatPanel = AIChatPanel()
+        AIChatPanelService.getInstance(project).setChatPanel(chatPanel)
+
         val contentFactory = ContentFactory.getInstance()
         val content = contentFactory.createContent(chatPanel, "", false)
         toolWindow.contentManager.addContent(content)
@@ -53,6 +57,7 @@ class AIChatToolWindowFactory : ToolWindowFactory {
             toolbar = actionToolbar.component
 
             val messageList = JBList<String>()
+            messageList.cellRenderer = ChatCellRenderer()
             messageList.model = listModel
 
             val scrollPane = JBScrollPane(messageList)
@@ -84,6 +89,7 @@ class AIChatToolWindowFactory : ToolWindowFactory {
         }
 
         private fun sendToAI(userMessage: String) {
+
             // We launch a background task. "Thinking..." will appear in the IDE status bar.
             object : Task.Backgroundable(null, "Thinking...", true) {
 
@@ -139,6 +145,11 @@ class AIChatToolWindowFactory : ToolWindowFactory {
                 // BACK ON THE EDT! Safe to touch UI.
                 listModel.addElement(message)
             }
+        }
+
+        fun setPromptAndSend(prompt: String) {
+            listModel.addElement("User: [Sent Code Selection]")
+            sendToAI(prompt)
         }
     }
 }
