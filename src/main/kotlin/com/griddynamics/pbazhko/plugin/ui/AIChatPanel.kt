@@ -7,7 +7,7 @@ import com.griddynamics.pbazhko.plugin.config.SYSTEM_MESSAGE_PREFIX
 import com.griddynamics.pbazhko.plugin.config.USER_MESSAGE_PREFIX
 import com.griddynamics.pbazhko.plugin.settings.AIChatSecureStorage
 import com.griddynamics.pbazhko.plugin.state.AppSettingsState
-import com.griddynamics.pbazhko.plugin.ui.components.ChatInputArea
+import com.griddynamics.pbazhko.plugin.ui.components.ChatInput
 import com.griddynamics.pbazhko.plugin.ui.components.Separator
 import com.intellij.openapi.actionSystem.ActionManager
 import com.intellij.openapi.actionSystem.DefaultActionGroup
@@ -46,14 +46,14 @@ class AIChatPanel : SimpleToolWindowPanel(true, true) {
 
         val messageListScrollPane = JBScrollPane(messageList)
 
-        val chatInputArea = ChatInputArea {
+        val chatInput = ChatInput {
             listModel.addElement("$USER_MESSAGE_PREFIX $it")
             sendToAI(it)
         }
 
         val inputContainer = JPanel(BorderLayout()).apply {
             add(Separator(1), BorderLayout.NORTH)
-            add(JBScrollPane(chatInputArea).apply {
+            add(JBScrollPane(chatInput).apply {
                 border = JBUI.Borders.empty()
             }, BorderLayout.CENTER)
         }
