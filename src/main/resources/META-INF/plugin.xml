@@ -1,19 +1,22 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.pbazhkogd.intellijideaaichatassistantplugin</id>
-    <name>IntelliJ-IDEA-AI-Chat-Assistant-Plugin</name>
-    <vendor>pbazhko-gd</vendor>
+    <id>com.pbazhko.ai-chat-plugin</id>
+    <name>AI Chat Assistant</name>
+    <vendor email="pbazhko@griddynamics.com" url="https://griddynamics.com">Pavel Bazhko</vendor>
     <description><![CDATA[
-        <p><b>IntelliJ-IDEA-AI-Chat-Assistant-Plugin</b> is a repository that provides a pure template to make it easier to create a new plugin project.</p>
-        <p>The main goal of this template is to speed up the setup phase of plugin development for both new and experienced developers by preconfiguring the project scaffold and CI, linking to the proper documentation pages, and keeping everything organized.</p>
+        <p><b>IntelliJ IDEA AI Chat Assistant</b></p>
+        <p>An IntelliJ IDEA plugin that provides direct access to an AI-powered chat assistant directly inside the IDE. Developers can use the chat to ask questions, get coding assistance, explain code, generate ideas, and improve their development workflow without leaving IntelliJ IDEA.</p>
+        <p>This plugin is developed as part of the GridU course "IntelliJ IDEA Plugin Development" and demonstrates how to integrate an AI chat experience into an IntelliJ IDEA plugin.</p>
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
 
-    <resource-bundle>messages.MyBundle</resource-bundle>
+    <resource-bundle>messages.AiChatAssistant</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.pbazhkogd.intellijideaaichatassistantplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="com.github.pbazhkogd.intellijideaaichatassistantplugin.startup.MyProjectActivity" />
+        <toolWindow id="AI Chat"
+                    anchor="right"
+                    icon="AllIcons.Actions.Refresh"
+                    factoryClass="com.griddynamics.pbazhko.plugin.toolWindow.AIChatToolWindowFactory"/>
     </extensions>
 </idea-plugin>

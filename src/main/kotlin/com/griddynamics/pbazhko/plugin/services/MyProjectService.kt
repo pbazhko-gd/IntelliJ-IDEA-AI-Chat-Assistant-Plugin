@@ -1,9 +1,9 @@
-package com.github.pbazhkogd.intellijideaaichatassistantplugin.services
+package com.griddynamics.pbazhko.plugin.services
 
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.project.Project
-import com.github.pbazhkogd.intellijideaaichatassistantplugin.MyBundle
+import com.griddynamics.pbazhko.plugin.MyBundle
 
 @Service(Service.Level.PROJECT)
 class MyProjectService(project: Project) {
