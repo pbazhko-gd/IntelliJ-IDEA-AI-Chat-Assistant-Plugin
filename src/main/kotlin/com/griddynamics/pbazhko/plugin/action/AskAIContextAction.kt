@@ -1,5 +1,6 @@
 package com.griddynamics.pbazhko.plugin.action
 
+import com.griddynamics.pbazhko.plugin.config.ASK_AI_ABOUT_SELECTION_TITLE
 import com.griddynamics.pbazhko.plugin.services.AIChatPanelService
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -9,7 +10,7 @@ import com.intellij.psi.PsiDocumentManager
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.PsiClass
 
-class AskAIContextAction : AnAction("Ask AI About Selection") {
+class AskAIContextAction : AnAction(ASK_AI_ABOUT_SELECTION_TITLE) {
 
     override fun update(e: AnActionEvent) {
 

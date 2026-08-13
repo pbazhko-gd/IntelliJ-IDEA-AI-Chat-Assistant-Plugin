@@ -2,7 +2,7 @@ package com.griddynamics.pbazhko.plugin.ui
 
 import com.google.gson.Gson
 import com.google.gson.JsonParser
-import com.griddynamics.pbazhko.plugin.action.OpenSettingsAction
+import com.griddynamics.pbazhko.plugin.action.OpenAISettingsAction
 import com.griddynamics.pbazhko.plugin.config.SYSTEM_MESSAGE_PREFIX
 import com.griddynamics.pbazhko.plugin.config.USER_MESSAGE_PREFIX
 import com.griddynamics.pbazhko.plugin.settings.AIChatSecureStorage
@@ -29,7 +29,7 @@ class AIChatPanel : SimpleToolWindowPanel(true, true) {
 
     init {
         val actionGroup = DefaultActionGroup()
-        actionGroup.add(OpenSettingsAction())
+        actionGroup.add(OpenAISettingsAction())
 
         val actionToolbar = ActionManager.getInstance().createActionToolbar(
             "AIChatToolbar",
