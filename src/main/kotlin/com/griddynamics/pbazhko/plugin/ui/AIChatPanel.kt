@@ -3,7 +3,7 @@ package com.griddynamics.pbazhko.plugin.ui
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.griddynamics.pbazhko.plugin.action.OpenSettingsAction
-import com.griddynamics.pbazhko.plugin.settings.SecureStorage
+import com.griddynamics.pbazhko.plugin.settings.AIChatSecureStorage
 import com.griddynamics.pbazhko.plugin.state.AppSettingsState
 import com.intellij.openapi.actionSystem.ActionManager
 import com.intellij.openapi.actionSystem.DefaultActionGroup
@@ -80,7 +80,7 @@ class AIChatPanel : SimpleToolWindowPanel(true, true) {
                 // Do NOT touch the messageList or inputArea here.
 
                 val url = AppSettingsState.Companion.instance.apiBaseUrl
-                val apiKey = SecureStorage.getApiKey()
+                val apiKey = AIChatSecureStorage.getApiKey()
 
                 if (apiKey.isNullOrEmpty()) {
                     updateUI("System: Please configure your API key in settings.")

@@ -9,7 +9,7 @@ plugins {
 dependencies {
     testImplementation("junit:junit:4.13.2")
     intellijPlatform {
-        intellijIdea("2025.2.6.2")
+        intellijIdea("2025.3.1.1")
         testFramework(TestFrameworkType.Platform)
         bundledPlugins(providers.gradleProperty("platformBundledPlugins").map { it.split(',') })
     }

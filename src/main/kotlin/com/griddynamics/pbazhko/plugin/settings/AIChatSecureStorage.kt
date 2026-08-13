@@ -4,7 +4,7 @@ import com.intellij.credentialStore.CredentialAttributes
 import com.intellij.credentialStore.generateServiceName
 import com.intellij.ide.passwordSafe.PasswordSafe
 
-object SecureStorage {
+object AIChatSecureStorage {
 
     private val CREDENTIAL_ATTRIBUTES = CredentialAttributes(
         generateServiceName("MyAIChatPlugin", "ApiKey")

@@ -33,21 +33,21 @@ class AppSettingsConfigurable : Configurable {
         val state = AppSettingsState.instance
         return urlField.text != state.apiBaseUrl ||
                 modelField.text != state.modelName ||
-                String(apiKeyField.password) != (SecureStorage.getApiKey() ?: "")
+                String(apiKeyField.password) != (AIChatSecureStorage.getApiKey() ?: "")
     }
 
     override fun apply() {
         val state = AppSettingsState.instance
         state.apiBaseUrl = urlField.text
         state.modelName = modelField.text
-        SecureStorage.setApiKey(String(apiKeyField.password))
+        AIChatSecureStorage.setApiKey(String(apiKeyField.password))
     }
 
     override fun reset() {
         val state = AppSettingsState.instance
         urlField.text = state.apiBaseUrl
         modelField.text = state.modelName
-        apiKeyField.text = SecureStorage.getApiKey() ?: ""
+        apiKeyField.text = AIChatSecureStorage.getApiKey() ?: ""
     }
 
     override fun disposeUIResources() {
