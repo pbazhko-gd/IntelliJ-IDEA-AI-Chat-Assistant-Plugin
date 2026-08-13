@@ -4,8 +4,9 @@
     <name>AI Chat Assistant</name>
     <vendor email="pbazhko@griddynamics.com" url="https://griddynamics.com">Pavel Bazhko</vendor>
     <description><![CDATA[
-        <p><b>IntelliJ-IDEA-AI-Chat-Assistant-Plugin</b></p>
-        <p>AI Chat Assistant</p>
+        <p><b>IntelliJ IDEA AI Chat Assistant</b></p>
+        <p>An IntelliJ IDEA plugin that provides direct access to an AI-powered chat assistant directly inside the IDE. Developers can use the chat to ask questions, get coding assistance, explain code, generate ideas, and improve their development workflow without leaving IntelliJ IDEA.</p>
+        <p>This plugin is developed as part of the GridU course "IntelliJ IDEA Plugin Development" and demonstrates how to integrate an AI chat experience into an IntelliJ IDEA plugin.</p>
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
