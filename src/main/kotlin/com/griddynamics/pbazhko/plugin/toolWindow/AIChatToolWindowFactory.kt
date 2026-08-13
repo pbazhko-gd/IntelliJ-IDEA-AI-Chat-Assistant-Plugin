@@ -1,5 +1,8 @@
 package com.griddynamics.pbazhko.plugin.toolWindow
 
+import com.griddynamics.pbazhko.plugin.action.OpenSettingsAction
+import com.intellij.openapi.actionSystem.ActionManager
+import com.intellij.openapi.actionSystem.DefaultActionGroup
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowFactory
@@ -25,6 +28,18 @@ class AIChatToolWindowFactory : ToolWindowFactory {
     class AIChatPanel : SimpleToolWindowPanel(true, true) {
 
         init {
+            val actionGroup = DefaultActionGroup()
+            actionGroup.add(OpenSettingsAction())
+
+            val actionToolbar = ActionManager.getInstance().createActionToolbar(
+                "AIChatToolbar",
+                actionGroup,
+                true // true = horizontal toolbar
+            )
+            actionToolbar.targetComponent = this
+
+            toolbar = actionToolbar.component
+
             val messageList = JBList<String>()
             val scrollPane = JBScrollPane(messageList)
 
