@@ -1,9 +1,10 @@
 package com.griddynamics.pbazhko.plugin.action
 
+import com.griddynamics.pbazhko.plugin.settings.AppSettingsConfigurable
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.ui.Messages
+import com.intellij.openapi.options.ShowSettingsUtil
 
 class OpenSettingsAction : AnAction("AI Settings", "Configure AI Provider", AllIcons.General.Settings) {
 
@@ -13,14 +14,9 @@ class OpenSettingsAction : AnAction("AI Settings", "Configure AI Provider", AllI
     }
 
     override fun actionPerformed(e: AnActionEvent) {
-        // Retrieve the current project context safely
         val project = e.project
 
-        // Placeholder behavior for now
-        Messages.showInfoMessage(
-            project,
-            "The settings screen will open here (Coming in Module 4!)",
-            "AI Chat Settings"
-        )
+        ShowSettingsUtil.getInstance()
+            .showSettingsDialog(project, AppSettingsConfigurable::class.java)
     }
 }

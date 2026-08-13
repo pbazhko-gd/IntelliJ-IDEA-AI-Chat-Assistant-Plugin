@@ -18,5 +18,12 @@
                     anchor="right"
                     icon="AllIcons.Actions.Refresh"
                     factoryClass="com.griddynamics.pbazhko.plugin.toolWindow.AIChatToolWindowFactory"/>
+        <applicationService
+                serviceImplementation="com.griddynamics.pbazhko.plugin.state.AppSettingsState"/>
+        <applicationConfigurable
+                parentId="tools"
+                id="com.griddynamics.pbazhko.plugin.settings.AppSettingsConfigurable"
+                instance="com.griddynamics.pbazhko.plugin.settings.AppSettingsConfigurable"
+                displayName="AI Chat Settings"/>
     </extensions>
 </idea-plugin>
