@@ -1,45 +1,44 @@
 package com.griddynamics.pbazhko.plugin.toolWindow
 
-import com.intellij.openapi.components.service
-import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowFactory
-import com.intellij.ui.components.JBLabel
-import com.intellij.ui.components.JBPanel
 import com.intellij.ui.content.ContentFactory
-import com.griddynamics.pbazhko.plugin.MyBundle
-import com.griddynamics.pbazhko.plugin.services.MyProjectService
-import javax.swing.JButton
-
+import com.intellij.openapi.ui.SimpleToolWindowPanel
+import com.intellij.ui.components.JBList
+import com.intellij.ui.components.JBScrollPane
+import com.intellij.ui.components.JBTextArea
+import java.awt.BorderLayout
+import javax.swing.JPanel
 
 class AIChatToolWindowFactory : ToolWindowFactory {
 
-    init {
-        thisLogger().warn("Don't forget to remove all non-needed sample code files with their corresponding registration entries in `plugin.xml`.")
-    }
-
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
-        val myToolWindow = MyToolWindow(toolWindow)
-        val content = ContentFactory.getInstance().createContent(myToolWindow.getContent(), null, false)
+        val chatPanel = AIChatPanel()
+        val contentFactory = ContentFactory.getInstance()
+        val content = contentFactory.createContent(chatPanel, "", false)
         toolWindow.contentManager.addContent(content)
     }
 
     override fun shouldBeAvailable(project: Project) = true
 
-    class MyToolWindow(toolWindow: ToolWindow) {
+    class AIChatPanel : SimpleToolWindowPanel(true, true) {
 
-        private val service = toolWindow.project.service<MyProjectService>()
+        init {
+            val messageList = JBList<String>()
+            val scrollPane = JBScrollPane(messageList)
 
-        fun getContent() = JBPanel<JBPanel<*>>().apply {
-            val label = JBLabel(MyBundle["randomLabel", "?"])
+            val inputArea = JBTextArea()
+            inputArea.rows = 3
+            inputArea.emptyText.text = "Ask AI a question..."
 
-            add(label)
-            add(JButton(MyBundle["shuffle"]).apply {
-                addActionListener {
-                    label.text = MyBundle["randomLabel", service.getRandomNumber()]
-                }
-            })
+            val inputScrollPane = JBScrollPane(inputArea)
+
+            val mainContainer = JPanel(BorderLayout())
+            mainContainer.add(scrollPane, BorderLayout.CENTER)
+            mainContainer.add(inputScrollPane, BorderLayout.SOUTH)
+
+            setContent(mainContainer)
         }
     }
 }
