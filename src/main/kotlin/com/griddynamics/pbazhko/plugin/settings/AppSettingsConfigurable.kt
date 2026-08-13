@@ -20,9 +20,9 @@ class AppSettingsConfigurable : Configurable {
 
     override fun createComponent(): JComponent? {
         myMainPanel = FormBuilder.createFormBuilder()
-            .addLabeledComponent("API Base URL", urlField, 1, true)
-            .addLabeledComponent("Model Name", modelField, 1, true)
-            .addLabeledComponent("API Key", apiKeyField, 1, true)
+            .addLabeledComponent("API Base URL", urlField, 1, false)
+            .addLabeledComponent("Model Name", modelField, 1, false)
+            .addLabeledComponent("API Key", apiKeyField, 1, false)
             .addComponentFillVertically(JPanel(), 0)
             .panel
 

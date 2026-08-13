@@ -1,15 +1,15 @@
 package com.griddynamics.pbazhko.plugin.services
 
+import com.griddynamics.pbazhko.plugin.ui.AIChatPanel
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.project.Project
-import com.griddynamics.pbazhko.plugin.toolWindow.AIChatToolWindowFactory
 
 @Service(Service.Level.PROJECT)
 class AIChatPanelService {
 
-    private var chatPanel: AIChatToolWindowFactory.AIChatPanel? = null
+    private var chatPanel: AIChatPanel? = null
 
-    fun setChatPanel(chatPanel: AIChatToolWindowFactory.AIChatPanel) {
+    fun setChatPanel(chatPanel: AIChatPanel) {
         this.chatPanel = chatPanel
     }
 

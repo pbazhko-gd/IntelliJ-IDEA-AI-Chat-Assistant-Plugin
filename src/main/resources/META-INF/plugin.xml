@@ -17,7 +17,7 @@
         <toolWindow id="AI Chat"
                     anchor="right"
                     icon="AllIcons.Actions.Refresh"
-                    factoryClass="com.griddynamics.pbazhko.plugin.toolWindow.AIChatToolWindowFactory"/>
+                    factoryClass="com.griddynamics.pbazhko.plugin.ui.AIChatToolWindowFactory"/>
         <applicationService
                 serviceImplementation="com.griddynamics.pbazhko.plugin.state.AppSettingsState"/>
         <applicationConfigurable

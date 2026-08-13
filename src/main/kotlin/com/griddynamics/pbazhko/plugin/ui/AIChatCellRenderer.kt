@@ -9,7 +9,7 @@ import javax.swing.JPanel
 import javax.swing.JTextArea
 import javax.swing.ListCellRenderer
 
-class ChatCellRenderer : ListCellRenderer<String> {
+class AIChatCellRenderer : ListCellRenderer<String> {
 
     override fun getListCellRendererComponent(
         list: JList<out String?>?,
@@ -17,7 +17,7 @@ class ChatCellRenderer : ListCellRenderer<String> {
         index: Int,
         isSelected: Boolean,
         cellHasFocus: Boolean
-    ): Component? {
+    ): Component {
         val message = value ?: ""
 
         val panel = JPanel(BorderLayout())
